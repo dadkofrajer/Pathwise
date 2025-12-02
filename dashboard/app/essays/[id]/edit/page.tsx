@@ -23,7 +23,7 @@ export default function EditEssayPage() {
 
   if (!essay) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #2a2a2a 0%, #252525 50%, #1e1e1e 100%)' }}>
         <div className="text-center">
           <p className="text-gray-400 mb-4">Essay not found</p>
           <button

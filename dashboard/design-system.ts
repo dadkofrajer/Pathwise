@@ -12,33 +12,44 @@
 // ============================================================================
 
 export const colors = {
-  // Primary Colors
-  background: "#0f0f0f",        // Main background
-  foreground: "#ededed",        // Main text color
-  cardBg: "#1a1a1a",            // Card/sidebar background
-  cardBgHover: "#2a2a2a",       // Hover state for cards/nav items
+  // Primary Colors - Enterprise Architecture Dark Theme
+  background: "#0a0a1a",        // Deep dark blue/purple background
+  backgroundSecondary: "#0f0f23", // Secondary dark blue
+  foreground: "#ffffff",        // Pure white text
+  cardBg: "#0f0f23",            // Card background (dark blue)
+  cardBgHover: "#14142d",       // Hover state for cards/nav items
   
-  // Accent Colors
-  accentBlue: "#60a5fa",        // Primary accent (blue)
-  accentBlueLight: "rgba(96, 165, 250, 0.2)",  // Blue with 20% opacity for borders
-  accentBlueGlow: "rgba(96, 165, 250, 0.1)",   // Blue glow for shadows
+  // Accent Colors - Bright, high-contrast
+  accentCyan: "#00ffff",        // Bright cyan (primary accent)
+  accentBlue: "#0080ff",        // Electric blue
+  accentMagenta: "#ff00ff",     // Bright magenta
+  accentElectricBlue: "#00d4ff", // Electric blue variant
+  accentTeal: "#00d4ff",        // Bright teal
+  accentYellow: "#ffff00",      // Bright yellow
+  accentGreen: "#00ff00",       // Bright green
   
-  // Status Colors
+  // Gradient Colors (Muted, pastel-like)
+  gradientPositive: "from-amber-300/25 to-emerald-300/25",  // Yellow-green
+  gradientProgress: "from-cyan-300/25 to-teal-300/25",     // Blue-green/teal
+  gradientComplete: "from-rose-300/25 to-orange-300/25",   // Pink-orange
+  
+  // Status Colors (Softer)
   green: "#22c55e",             // Success/green status
-  greenText: "#22c55e",         // Green text (e.g., text-green-400)
-  blue: "#3b82f6",              // Blue status (e.g., bg-blue-500)
-  pink: "#ec4899",              // Pink status (e.g., bg-pink-500)
+  greenText: "#4ade80",         // Softer green text
+  blue: "#38bdf8",              // Softer blue status
+  pink: "#f472b6",              // Softer pink status
+  teal: "#14b8a6",              // Teal for in-progress
   
-  // Text Colors
-  textPrimary: "#ffffff",       // Primary text (white)
-  textSecondary: "#d1d5db",     // Secondary text (gray-300)
-  textTertiary: "#9ca3af",      // Tertiary text (gray-400)
-  textMuted: "#6b7280",         // Muted text (gray-500)
+  // Text Colors - High contrast
+  textPrimary: "#ffffff",       // Primary text (pure white)
+  textSecondary: "#e5e5e5",     // Secondary text (light gray)
+  textTertiary: "#b8b8b8",      // Tertiary text
+  textMuted: "#999999",         // Muted text
   
-  // Border Colors
-  borderPrimary: "#374151",     // Primary border (gray-700)
-  borderSecondary: "#1f2937",   // Secondary border (gray-800)
-  borderDark: "#333333",        // Dark border for charts/grids
+  // Border Colors - Visible white outlines
+  borderPrimary: "rgba(255, 255, 255, 0.2)",     // Thin white borders (more visible)
+  borderSecondary: "rgba(255, 255, 255, 0.15)",   // Subtle borders
+  borderDark: "rgba(255, 255, 255, 0.25)",        // More visible borders
   
   // Chart Colors (from MonthlyGrowthChart)
   chartCyan: "#00ffff",
@@ -122,9 +133,9 @@ export const spacing = {
 
 export const borderRadius = {
   sm: "0.125rem",   // 2px - rounded-sm
-  md: "0.375rem",   // 6px - rounded-md
-  lg: "0.5rem",     // 8px - rounded-lg
-  xl: "0.75rem",    // 12px - rounded-xl (most common for cards)
+  md: "0.25rem",    // 4px - rounded (slightly rounded corners)
+  lg: "0.375rem",   // 6px - rounded-md (most common for cards)
+  xl: "0.5rem",     // 8px - rounded-lg
   full: "9999px",   // rounded-full
 } as const;
 
@@ -148,11 +159,11 @@ export const shadows = {
 // ============================================================================
 
 export const componentPatterns = {
-  // Card Component
+  // Card Component - Enterprise Architecture Style
   card: {
-    base: "bg-[#1a1a1a] rounded-xl p-6 border border-[#60a5fa]/20 shadow-[0_0_15px_rgba(96,165,250,0.1)]",
-    header: "text-white text-lg font-semibold mb-4",
-    content: "text-gray-300",
+    base: "bg-[#0f0f23] rounded-md p-6 border border-white/20",
+    header: "text-white text-lg font-bold mb-4",
+    content: "text-white/70",
   },
   
   // Stat Card

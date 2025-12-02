@@ -62,10 +62,10 @@ export default function EssaysPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen bg-[#0f0f0f]">
+      <div className="flex min-h-screen bg-[#0a0a1a]">
         <Sidebar />
         <main className="flex-1 p-8 flex items-center justify-center">
-          <p className="text-gray-400">Loading essays...</p>
+          <p className="text-white/50">Loading essays...</p>
         </main>
       </div>
     );
@@ -73,13 +73,27 @@ export default function EssaysPage() {
 
   return (
     <>
-      <div className="flex min-h-screen bg-[#0f0f0f]">
+      <div className="flex min-h-screen bg-[#0a0a1a]">
         <Sidebar />
-        <main className="flex-1 p-8">
-          <div className="mb-6">
-            <h1 className="text-white text-2xl font-semibold mb-2">Essay Manager</h1>
-            <p className="text-gray-400">Manage your college application essays</p>
-          </div>
+        <main className="flex-1 overflow-y-auto">
+          {/* Top Navigation Header */}
+          <header className="border-b border-white/20 bg-[#0f0f23] px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-white">Essay Repository</h1>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="px-4 py-2 bg-[#0f0f23] border border-white/20 rounded-md">
+                  <span className="text-sm text-white font-medium">
+                    {generalEssays.length + collegeEssays.reduce((sum, c) => sum + c.essays.length, 0)} essays
+                  </span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <div className="p-6">
 
           {/* General Essays Section */}
           <GeneralEssaySection
@@ -89,30 +103,35 @@ export default function EssaysPage() {
             onAdd={handleAddGeneral}
           />
 
-          {/* College-Specific Essays Section */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Building2 size={24} className="text-[#60a5fa]" />
-              <h2 className="text-white text-xl font-semibold">College-Specific Essays</h2>
-            </div>
+            {/* College-Specific Essays Section */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Building2 size={20} className="text-[#00ffff]" />
+                <h2 className="text-white text-xl font-bold">College-Specific Essays</h2>
+              </div>
 
-            {collegeEssays.length === 0 ? (
-              <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#60a5fa]/20 shadow-[0_0_15px_rgba(96,165,250,0.1)]">
-                <p className="text-gray-400 text-center">No college-specific essays yet.</p>
-              </div>
-            ) : (
-              <div>
-                {collegeEssays.map((college) => (
-                  <CollegeEssaySection
-                    key={college.id}
-                    college={college}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    onAdd={handleAddCollege}
-                  />
-                ))}
-              </div>
-            )}
+              {collegeEssays.length === 0 ? (
+                <div className="bg-[#0f0f23] border border-white/20 rounded-md p-12 text-center">
+                  <div className="inline-flex p-4 bg-[#0a0a1a] border border-white/20 rounded-md mb-4">
+                    <Building2 size={32} className="text-white/50" />
+                  </div>
+                  <p className="text-white/70 mb-2">No college-specific essays yet.</p>
+                  <p className="text-sm text-white/50">Click "Add Essay" to get started</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {collegeEssays.map((college) => (
+                    <CollegeEssaySection
+                      key={college.id}
+                      college={college}
+                      onEdit={handleEdit}
+                      onDelete={handleDelete}
+                      onAdd={handleAddCollege}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </main>
       </div>

@@ -59,27 +59,27 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-[#1a1a1a] rounded-xl border border-[#60a5fa]/20 shadow-[0_0_15px_rgba(96,165,250,0.1)] w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+      <div className="bg-[#0f0f23] border border-white/20 rounded-md shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <h2 className="text-white text-xl font-semibold">
+        <div className="flex items-center justify-between p-6 border-b border-white/20">
+          <h2 className="text-white text-xl font-bold">
             {collegeName ? `Add Essay for ${collegeName}` : 'Create New Essay'}
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-white/70 hover:text-white hover:bg-[#0a0a1a] p-1.5 rounded-md transition-all duration-200"
             aria-label="Close modal"
           >
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Title */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="title" className="block text-sm font-semibold text-white mb-2">
               Essay Title *
             </label>
             <input
@@ -88,14 +88,14 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Common Application Essay"
-              className="w-full bg-[#0f0f0f] border border-gray-700 rounded-lg px-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#60a5fa] transition-colors"
+              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
               required
             />
           </div>
 
           {/* Prompt */}
           <div>
-            <label htmlFor="prompt" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="prompt" className="block text-sm font-semibold text-white mb-2">
               Essay Prompt *
             </label>
             <textarea
@@ -104,14 +104,14 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Enter the essay prompt or question..."
               rows={4}
-              className="w-full bg-[#0f0f0f] border border-gray-700 rounded-lg px-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#60a5fa] transition-colors resize-none"
+              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200 resize-none"
               required
             />
           </div>
 
           {/* Word Limit */}
           <div>
-            <label htmlFor="wordLimit" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="wordLimit" className="block text-sm font-semibold text-white mb-2">
               Word Limit
             </label>
             <input
@@ -120,13 +120,13 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={wordLimit}
               onChange={(e) => setWordLimit(Number(e.target.value) || 650)}
               min="1"
-              className="w-full bg-[#0f0f0f] border border-gray-700 rounded-lg px-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#60a5fa] transition-colors"
+              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
             />
           </div>
 
           {/* Google Doc URL */}
           <div>
-            <label htmlFor="googleDocUrl" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="googleDocUrl" className="block text-sm font-semibold text-white mb-2">
               Google Doc URL (Optional)
             </label>
             <input
@@ -135,13 +135,13 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={googleDocUrl}
               onChange={(e) => setGoogleDocUrl(e.target.value)}
               placeholder="https://docs.google.com/document/d/..."
-              className="w-full bg-[#0f0f0f] border border-gray-700 rounded-lg px-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#60a5fa] transition-colors"
+              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
             />
           </div>
 
           {/* Initial Content (Optional) */}
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="content" className="block text-sm font-semibold text-white mb-2">
               Initial Content (Optional)
             </label>
             <textarea
@@ -150,22 +150,22 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               onChange={(e) => setContent(e.target.value)}
               placeholder="Start writing your essay here (optional)..."
               rows={6}
-              className="w-full bg-[#0f0f0f] border border-gray-700 rounded-lg px-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-[#60a5fa] transition-colors resize-none"
+              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200 resize-none"
             />
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-700">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/20">
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+              className="px-4 py-2 text-white/70 hover:text-white hover:bg-[#0a0a1a] rounded-md transition-all duration-200 text-sm font-medium"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex items-center gap-2 bg-[#60a5fa] text-white px-4 py-2 rounded-lg hover:bg-[#3b82f6] transition-colors text-sm font-medium"
+              className="flex items-center gap-2 bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
             >
               <Plus size={16} />
               Create Essay

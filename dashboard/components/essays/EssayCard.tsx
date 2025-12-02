@@ -29,36 +29,71 @@ export default function EssayCard({ essay, onEdit, onDelete }: EssayCardProps) {
     }
   };
 
+  const progressPercentage = Math.min((essay.wordCount / essay.wordLimit) * 100, 100);
+  const isOverLimit = essay.wordCount > essay.wordLimit;
+
+  const progressBarColor = isOverLimit 
+    ? '#ff00ff' 
+    : progressPercentage >= 90 
+    ? '#00ffff'
+    : progressPercentage >= 80
+    ? '#00d4ff'
+    : '#0080ff';
+
   return (
-    <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#60a5fa]/20 shadow-[0_0_15px_rgba(96,165,250,0.1)] hover:bg-[#2a2a2a] transition-colors">
+    <div className="bg-[#0f0f23] border border-white/20 rounded-md p-6 hover:border-[#00ffff]/50 transition-all duration-200">
       <div className="mb-4">
-        <h3 className="text-white text-lg font-semibold mb-2">{essay.title}</h3>
-        <p className="text-gray-300 text-sm mb-4 line-clamp-2">{essay.prompt}</p>
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-white text-base font-bold flex-1">{essay.title}</h3>
+          {essay.collegeName && (
+            <span className="px-2 py-0.5 bg-[#0a0a1a] border border-[#00ffff] rounded-md text-xs text-[#00ffff] ml-2 font-medium">
+              {essay.collegeName.split(' ')[0]}
+            </span>
+          )}
+        </div>
+        <p className="text-white/70 text-sm mb-4 line-clamp-2 leading-relaxed">{essay.prompt}</p>
       </div>
 
-      <div className="flex items-center gap-4 mb-4 text-sm text-gray-400">
-        <span>Word Limit: {essay.wordLimit}</span>
-        <span>Word Count: {essay.wordCount}</span>
+      {/* Progress Bar */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs text-white/50 font-medium">Progress</span>
+          <span className="text-xs font-bold text-white">
+            {essay.wordCount} / {essay.wordLimit}
+          </span>
+        </div>
+        <div className="w-full bg-[#0a0a1a] rounded-full h-1.5 overflow-hidden border border-white/10">
+          <div
+            className="h-full transition-all duration-500 ease-out"
+            style={{ 
+              width: `${Math.min(progressPercentage, 100)}%`,
+              backgroundColor: progressBarColor
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 mb-4 text-xs text-white/50">
         <span>Last edited: {formatDate(essay.lastEdited)}</span>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-4 border-t border-white/10">
         <StatusBadge status={essay.status} />
         <div className="flex items-center gap-2">
           <button
             onClick={handleEdit}
-            className="flex items-center gap-2 bg-[#60a5fa] text-white px-4 py-2 rounded-lg hover:bg-[#3b82f6] transition-colors text-sm font-medium"
+            className="flex items-center gap-2 bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
           >
-            <Pencil size={16} />
+            <Pencil size={14} />
             Edit
           </button>
           {onDelete && (
             <button
               onClick={handleDelete}
-              className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 bg-[#0f0f23] border border-white/20 text-white/70 px-4 py-2 rounded-md hover:border-[#ff00ff] hover:text-[#ff00ff] transition-all duration-200 text-sm font-medium"
               aria-label="Delete essay"
             >
-              <Trash2 size={16} />
+              <Trash2 size={14} />
               Delete
             </button>
           )}
@@ -67,4 +102,3 @@ export default function EssayCard({ essay, onEdit, onDelete }: EssayCardProps) {
     </div>
   );
 }
-

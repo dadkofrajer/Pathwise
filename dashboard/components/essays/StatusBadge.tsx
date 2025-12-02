@@ -2,7 +2,7 @@
 
 import { EssayStatus } from '@/lib/essays/types';
 import { getStatusLabel } from '@/lib/essays/utils';
-import { FileText } from 'lucide-react';
+import { Circle, Clock, CheckCircle2 } from 'lucide-react';
 
 interface StatusBadgeProps {
   status: EssayStatus;
@@ -13,19 +13,41 @@ export default function StatusBadge({ status, showIcon = true }: StatusBadgeProp
   const getStatusStyles = () => {
     switch (status) {
       case 'not_started':
-        return 'bg-gray-600 text-gray-300';
+        return {
+          bg: 'bg-[#0a0a1a]',
+          border: 'border-white/20',
+          text: 'text-white/50',
+          icon: <Circle size={12} className="text-white/50" />
+        };
       case 'in_progress':
-        return 'bg-blue-600 text-white';
+        return {
+          bg: 'bg-[#0a0a1a]',
+          border: 'border-[#00ffff]',
+          text: 'text-[#00ffff]',
+          icon: <Clock size={12} className="text-[#00ffff]" />
+        };
       case 'complete':
-        return 'bg-green-600 text-white';
+        return {
+          bg: 'bg-[#0a0a1a]',
+          border: 'border-[#00ffff]',
+          text: 'text-[#00ffff]',
+          icon: <CheckCircle2 size={12} className="text-[#00ffff]" />
+        };
       default:
-        return 'bg-gray-600 text-gray-300';
+        return {
+          bg: 'bg-[#0a0a1a]',
+          border: 'border-white/20',
+          text: 'text-white/50',
+          icon: <Circle size={12} className="text-white/50" />
+        };
     }
   };
 
+  const styles = getStatusStyles();
+
   return (
-    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium ${getStatusStyles()}`}>
-      {showIcon && <FileText size={14} />}
+    <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border ${styles.bg} ${styles.border} ${styles.text}`}>
+      {showIcon && styles.icon}
       <span>{getStatusLabel(status)}</span>
     </div>
   );

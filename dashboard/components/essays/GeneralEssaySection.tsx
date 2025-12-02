@@ -2,7 +2,7 @@
 
 import { Essay } from '@/lib/essays/types';
 import EssayCard from './EssayCard';
-import { Plus } from 'lucide-react';
+import { Plus, FileText } from 'lucide-react';
 
 interface GeneralEssaySectionProps {
   essays: Essay[];
@@ -19,12 +19,18 @@ export default function GeneralEssaySection({
 }: GeneralEssaySectionProps) {
   return (
     <div className="mb-8">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-white text-xl font-semibold">General Essays</h2>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <FileText size={20} className="text-[#ff00ff]" />
+          <div>
+            <h2 className="text-white text-xl font-bold">General Essays</h2>
+            <p className="text-white/50 text-sm mt-0.5">{essays.length} {essays.length === 1 ? 'essay' : 'essays'}</p>
+          </div>
+        </div>
         {onAdd && (
           <button
             onClick={onAdd}
-            className="flex items-center gap-2 bg-[#2a2a2a] text-white px-4 py-2 rounded-lg hover:bg-[#3a3a3a] transition-colors text-sm font-medium"
+            className="flex items-center gap-2 bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
           >
             <Plus size={16} />
             Add Essay
@@ -33,11 +39,15 @@ export default function GeneralEssaySection({
       </div>
 
       {essays.length === 0 ? (
-        <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#60a5fa]/20 shadow-[0_0_15px_rgba(96,165,250,0.1)]">
-          <p className="text-gray-400 text-center">No general essays yet. Click "Add Essay" to create one.</p>
+        <div className="bg-[#0f0f23] border border-white/20 rounded-md p-12 text-center">
+          <div className="inline-flex p-4 bg-[#0a0a1a] border border-white/20 rounded-md mb-4">
+            <FileText size={32} className="text-white/50" />
+          </div>
+          <p className="text-white/70 mb-2">No general essays yet.</p>
+          <p className="text-sm text-white/50">Click "Add Essay" to create your first essay</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {essays.map((essay) => (
             <EssayCard
               key={essay.id}
