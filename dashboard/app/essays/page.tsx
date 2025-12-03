@@ -73,9 +73,9 @@ export default function EssaysPage() {
 
   return (
     <>
-      <div className="flex min-h-screen bg-[#0a0a1a]">
+      <div className="min-h-screen bg-[#0a0a1a]">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto">
+        <main className="ml-64 overflow-y-auto">
           {/* Top Navigation Header */}
           <header className="border-b border-white/20 bg-[#0f0f23] px-6 py-4">
             <div className="flex items-center justify-between">
