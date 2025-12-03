@@ -122,7 +122,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={`fixed left-0 top-0 h-screen bg-[#0a0a1a] border-r border-white/20 flex flex-col transition-all duration-300 ease-in-out z-50 ${
+    <div className={`fixed left-4 top-4 bottom-4 bg-[#0f0f23] border border-white/20 rounded-2xl flex flex-col transition-all duration-300 ease-in-out z-50 shadow-2xl ${
       isCollapsed ? 'w-16' : 'w-64'
     }`}>
       {/* Header Section */}

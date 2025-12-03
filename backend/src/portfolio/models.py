@@ -194,3 +194,34 @@ class RegenerateTasksResponse(BaseModel):
     section_type: str
     section_identifier: Optional[str] = None
     tasks: list[RecommendationTask] = Field(..., description="Exactly 3 alternative tasks")
+
+# Essay Analysis Models
+class EssaySuggestion(BaseModel):
+    type: Literal["structure", "content", "tone", "grammar", "clarity", "prompt_alignment"]
+    priority: Literal["high", "medium", "low"]
+    location: Optional[str] = Field(None, description="Sentence/paragraph reference")
+    current_text: Optional[str] = None
+    suggested_text: Optional[str] = None
+    explanation: str
+
+class EssayAnalysis(BaseModel):
+    id: str
+    essay_id: str
+    overall_score: float = Field(ge=0.0, le=10.0)
+    strengths: list[str] = Field(default_factory=list)
+    weaknesses: list[str] = Field(default_factory=list)
+    structure_score: float = Field(ge=0.0, le=10.0)
+    content_score: float = Field(ge=0.0, le=10.0)
+    tone_score: float = Field(ge=0.0, le=10.0)
+    prompt_alignment_score: float = Field(ge=0.0, le=10.0)
+    readability_score: float = Field(ge=0.0, le=100.0)  # Flesch-Kincaid
+    word_count: int
+    target_word_count: Optional[int] = None
+    suggestions: list[EssaySuggestion] = Field(default_factory=list)
+    created_at: str
+
+class AnalyzeEssayRequest(BaseModel):
+    essay_text: str
+    prompt_text: Optional[str] = None
+    target_word_count: Optional[int] = None
+    essay_id: Optional[str] = None

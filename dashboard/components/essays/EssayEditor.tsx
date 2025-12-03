@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Essay } from '@/lib/essays/types';
+import { Essay, EssaySuggestion } from '@/lib/essays/types';
 import { countWords, calculateStatus, getStatusLabel } from '@/lib/essays/utils';
-import { ArrowLeft, Save, Link as LinkIcon, ChevronDown, ChevronUp, Sparkles, Upload, FileText, Copy, CheckCircle2, Circle, Clock, Keyboard, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Save, Link as LinkIcon, ChevronDown, ChevronUp, Sparkles, Upload, FileText, Copy, CheckCircle2, Circle, Clock, Keyboard, HelpCircle, BarChart3 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import EssayAnalyzer from './EssayAnalyzer';
 
 interface EssayEditorProps {
   essay: Essay;
@@ -23,6 +24,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
   const [isFocusMode, setIsFocusMode] = useState(false);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
+  const [showAnalysis, setShowAnalysis] = useState(false);
   const autoSaveTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Update word count when content changes
@@ -321,6 +323,19 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
 
           <div className="mt-4 flex items-center gap-3">
             <button
+              onClick={() => setShowAnalysis(!showAnalysis)}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out active:scale-95 ${
+                showAnalysis
+                  ? 'bg-[#00ffff] text-[#0a0a1a]'
+                  : 'text-white/70 hover:text-white hover:bg-[#0f0f23] border border-white/20 hover:border-[#00ffff]'
+              }`}
+              onMouseEnter={() => setShowTooltip(showAnalysis ? 'Hide analysis' : 'Show essay analysis')}
+              onMouseLeave={() => setShowTooltip(null)}
+            >
+              <BarChart3 size={16} />
+              {showAnalysis ? 'Hide Analysis' : 'Analyze Essay'}
+            </button>
+            <button
               className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-[#0f0f23] border border-white/20 hover:border-[#00ffff] rounded-md transition-all duration-200 ease-in-out active:scale-95 font-medium"
               onMouseEnter={() => setShowTooltip('AI-powered essay refinement')}
               onMouseLeave={() => setShowTooltip(null)}
@@ -337,6 +352,30 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
               {isFocusMode ? 'Exit Focus' : 'Focus Mode'}
             </button>
           </div>
+
+          {/* Essay Analysis Panel */}
+          {showAnalysis && (
+            <div className="mt-6 bg-[#0f0f23] border border-white/20 rounded-md p-6">
+              <EssayAnalyzer
+                essay={essay}
+                onApplySuggestion={(suggestion: EssaySuggestion) => {
+                  if (suggestion.suggestedText && suggestion.currentText) {
+                    const newContent = essay.content.replace(
+                      suggestion.currentText,
+                      suggestion.suggestedText
+                    );
+                    setEssay(prev => ({
+                      ...prev,
+                      content: newContent,
+                      updatedAt: new Date(),
+                      lastEdited: new Date(),
+                    }));
+                    setHasUnsavedChanges(true);
+                  }
+                }}
+              />
+            </div>
+          )}
         </div>
 
         {/* Right Sidebar */}

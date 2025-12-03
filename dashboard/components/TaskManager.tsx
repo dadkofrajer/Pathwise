@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { 
   CheckCircle2, 
   Clock, 
@@ -14,6 +15,7 @@ import {
 import { PortfolioAnalysis, LensScores } from "@/lib/portfolio/types";
 import { mockPortfolioAnalysis } from "@/lib/portfolio/mockData";
 import { loadCachedPortfolioAnalysis } from "@/lib/portfolio/portfolioService";
+import { generateTaskId } from "@/lib/learning/utils";
 
 interface TaskManagerProps {
   data?: PortfolioAnalysis;
@@ -95,11 +97,22 @@ function CircularProgress({ score, size = 120, strokeWidth = 8 }: CircularProgre
 }
 
 export default function TaskManager({ data }: TaskManagerProps) {
+  const router = useRouter();
   // Use provided data, cached data, or fall back to mock data
   const portfolioData = data || loadCachedPortfolioAnalysis() || mockPortfolioAnalysis;
   const [expandedTasks, setExpandedTasks] = useState<Set<string>>(new Set());
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
   const lensScores = portfolioData.scores?.lens_scores;
+
+  const handleTaskClick = (task: any, lensName: string) => {
+    const taskId = generateTaskId({ title: task.title, lensName });
+    // Store task data in sessionStorage for the learning page
+    sessionStorage.setItem(`task-${taskId}`, JSON.stringify({
+      ...task,
+      lensName,
+    }));
+    router.push(`/learning/${encodeURIComponent(taskId)}`);
+  };
 
   const toggleTask = (taskTitle: string) => {
     const newExpanded = new Set(expandedTasks);
@@ -167,17 +180,15 @@ export default function TaskManager({ data }: TaskManagerProps) {
                 {/* Task Previews */}
                 <div className="space-y-2">
                   {previewTasks.map((task, taskIndex) => {
-                    const isTaskExpanded = expandedTasks.has(task.title);
-                    
                     return (
                       <div
                         key={taskIndex}
-                        className="bg-[#0f0f23] border border-white/10 rounded-md overflow-hidden"
+                        className="bg-[#0f0f23] border border-white/10 rounded-md overflow-hidden hover:border-[#00d4ff]/30 transition-colors"
                       >
-                        {/* Task Preview Header */}
+                        {/* Task Preview Header - Click to navigate to learning page */}
                         <div
                           className="p-3 cursor-pointer hover:bg-white/5 transition-colors"
-                          onClick={() => toggleTask(task.title)}
+                          onClick={() => handleTaskClick(task, lensName)}
                         >
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex-1 min-w-0">
@@ -195,61 +206,9 @@ export default function TaskManager({ data }: TaskManagerProps) {
                                 </div>
                               </div>
                             </div>
-                            {isTaskExpanded ? (
-                              <ChevronUp size={16} className="text-white/50 flex-shrink-0 mt-0.5" />
-                            ) : (
-                              <ChevronDown size={16} className="text-white/50 flex-shrink-0 mt-0.5" />
-                            )}
+                            <ArrowRight size={16} className="text-white/50 flex-shrink-0 mt-0.5" />
                           </div>
                         </div>
-
-                        {/* Expanded Task Details */}
-                        {isTaskExpanded && (
-                          <div className="border-t border-white/10 p-3 space-y-3 bg-[#0a0a1a]">
-                            {/* Micro Coaching */}
-                            <div className="bg-[#0f0f23] border border-[#00d4ff]/20 rounded-md p-2">
-                              <div className="flex items-center gap-1.5 mb-1">
-                                <Lightbulb size={12} className="text-[#00d4ff]" />
-                                <span className="text-xs font-semibold text-[#00d4ff]">Micro Coaching</span>
-                              </div>
-                              <p className="text-xs text-white/70 leading-relaxed">{task.micro_coaching}</p>
-                            </div>
-
-                            {/* Definition of Done */}
-                            <div>
-                              <h6 className="text-xs font-semibold text-white mb-1.5">Definition of Done</h6>
-                              <ul className="space-y-1">
-                                {task.definition_of_done.map((item, idx) => (
-                                  <li key={idx} className="flex items-start gap-1.5 text-xs text-white/70">
-                                    <span className="text-[#00ffff] mt-0.5">•</span>
-                                    <span>{item}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Quick Links */}
-                            {task.quick_links.length > 0 && (
-                              <div>
-                                <h6 className="text-xs font-semibold text-white mb-1.5">Quick Links</h6>
-                                <div className="flex flex-col gap-1">
-                                  {task.quick_links.map((link, idx) => (
-                                    <a
-                                      key={idx}
-                                      href={link}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="flex items-center gap-1 text-xs text-[#00d4ff] hover:text-[#00ffff] transition-colors"
-                                    >
-                                      <ExternalLink size={12} />
-                                      <span className="truncate">{link}</span>
-                                    </a>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
                       </div>
                     );
                   })}

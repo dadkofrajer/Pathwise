@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.portfolio.api import router as portfolio_router, test_router, eligibility_router
+from src.portfolio.api import router as portfolio_router, test_router, eligibility_router, essay_router
 
 app = FastAPI(title="Portfolio Analyzer API", version="0.1.0")
 
@@ -10,4 +10,5 @@ def healthz():
 app.include_router(portfolio_router)
 app.include_router(test_router)
 app.include_router(eligibility_router)
+app.include_router(essay_router)
 
