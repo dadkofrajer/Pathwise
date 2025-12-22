@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.portfolio.api import router as portfolio_router, test_router, eligibility_router, profile_router
+from src.portfolio.api import router as portfolio_router, test_router, eligibility_router, profile_router, essay_router
 
 app = FastAPI(title="Portfolio Analyzer API", version="0.1.0")
 
@@ -21,4 +21,5 @@ app.include_router(portfolio_router)
 app.include_router(test_router)
 app.include_router(eligibility_router)
 app.include_router(profile_router)
+app.include_router(essay_router)
 

@@ -108,7 +108,7 @@ export default function ApplicationTimeline() {
   );
 
   return (
-    <div className="bg-[#0f0f23] border border-white/20 rounded-md p-6">
+    <div className="bg-[#0f0f23] border border-white/20 rounded-md p-6 overflow-visible">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-white text-xl font-bold">Application Timeline</h2>
         <div className="flex items-center gap-4 text-sm text-white/50">
@@ -134,18 +134,18 @@ export default function ApplicationTimeline() {
       {/* Horizontal Timeline */}
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute top-8 left-0 right-0 h-0.5 bg-white/10"></div>
+        <div className="absolute top-12 left-0 right-0 h-0.5 bg-white/10"></div>
 
         {/* Timeline Events */}
-        <div className="relative flex items-start gap-8 overflow-x-auto pb-4">
+        <div className="relative flex items-start gap-8 overflow-x-auto pb-4 overflow-y-visible">
           {sortedEvents.map((event, index) => (
             <div
               key={event.id}
-              className="flex-shrink-0 flex flex-col items-center cursor-pointer group"
+              className="flex-shrink-0 flex flex-col items-center cursor-pointer group pt-4"
               onClick={() => setSelectedEvent(selectedEvent === event.id ? null : event.id)}
             >
               {/* Event Dot */}
-              <div className={`relative z-10 w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${getStatusColor(event.status)} ${
+              <div className={`relative z-20 w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${getStatusColor(event.status)} ${
                 selectedEvent === event.id ? 'scale-110' : 'group-hover:scale-105'
               }`}>
                 {getStatusIcon(event.status)}

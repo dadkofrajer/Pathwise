@@ -1,14 +1,16 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Body
 from fastapi.encoders import jsonable_encoder
-from typing import List
+from typing import List, Optional
 from .models import (
     PortfolioAnalyzeRequest, PortfolioAnalyzeResponse,
     TestPlanRequest, TestPlanResponse,
     EligibilityCheckRequest, EligibilityCheckResponse,
     RegenerateTasksRequest, RegenerateTasksResponse,
-    Evidence, StudentProfile
+    Evidence, StudentProfile,
+    EssayAnalysis, AnalyzeEssayRequest
 )
 from .service import analyze_portfolio, plan_tests, check_eligibility, regenerate_tasks_for_section
+from .essay_analyzer import EssayAnalyzer
 
 router = APIRouter(prefix="/portfolio", tags=["portfolio"])
 
@@ -129,3 +131,43 @@ def delete_activity(student_id: str, activity_id: str):
         raise HTTPException(status_code=404, detail="Activity not found")
     
     return {"message": "Activity deleted"}
+
+# Essay Analysis Routes
+essay_router = APIRouter(prefix="/essays", tags=["essays"])
+
+@essay_router.post("/analyze-text", response_model=EssayAnalysis)
+def analyze_essay_text(request: AnalyzeEssayRequest):
+    """Analyze essay text directly (for draft analysis)"""
+    try:
+        analyzer = EssayAnalyzer()
+        result = analyzer.analyze_essay(
+            essay_text=request.essay_text,
+            essay_id=request.essay_id,
+            prompt=request.prompt_text,
+            target_word_count=request.target_word_count
+        )
+        return jsonable_encoder(result)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Essay analysis error: {e}")
+
+@essay_router.post("/{essay_id}/analyze", response_model=EssayAnalysis)
+def analyze_essay(
+    essay_id: str,
+    request: AnalyzeEssayRequest
+):
+    """Analyze an essay by ID and return feedback"""
+    try:
+        analyzer = EssayAnalyzer()
+        result = analyzer.analyze_essay(
+            essay_text=request.essay_text,
+            essay_id=essay_id,
+            prompt=request.prompt_text,
+            target_word_count=request.target_word_count
+        )
+        return jsonable_encoder(result)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Essay analysis error: {e}")
