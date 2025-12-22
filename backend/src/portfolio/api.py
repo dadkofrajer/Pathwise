@@ -1,10 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.encoders import jsonable_encoder
+from typing import List
 from .models import (
     PortfolioAnalyzeRequest, PortfolioAnalyzeResponse,
     TestPlanRequest, TestPlanResponse,
     EligibilityCheckRequest, EligibilityCheckResponse,
-    RegenerateTasksRequest, RegenerateTasksResponse
+    RegenerateTasksRequest, RegenerateTasksResponse,
+    Evidence, StudentProfile
 )
 from .service import analyze_portfolio, plan_tests, check_eligibility, regenerate_tasks_for_section
 
@@ -59,3 +61,71 @@ def regenerate_tasks(req: RegenerateTasksRequest):
         raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Task regeneration error: {e}")
+
+# Portfolio CRUD endpoints
+profile_router = APIRouter(prefix="/profile", tags=["profile"])
+
+# In-memory storage (replace with database in production)
+_portfolio_storage: dict[str, List[Evidence]] = {}
+_profile_storage: dict[str, StudentProfile] = {}
+
+@profile_router.get("/{student_id}")
+def get_profile(student_id: str):
+    """Get student profile and portfolio activities"""
+    profile = _profile_storage.get(student_id)
+    activities = _portfolio_storage.get(student_id, [])
+    
+    return {
+        "profile": jsonable_encoder(profile) if profile else None,
+        "activities": [jsonable_encoder(activity) for activity in activities]
+    }
+
+@profile_router.post("/{student_id}")
+def create_or_update_profile(student_id: str, profile: StudentProfile):
+    """Create or update student profile"""
+    _profile_storage[student_id] = profile
+    return {"message": "Profile updated", "profile": jsonable_encoder(profile)}
+
+@profile_router.post("/{student_id}/activities", response_model=Evidence)
+def add_activity(student_id: str, activity: Evidence):
+    """Add a new activity to student's portfolio"""
+    if student_id not in _portfolio_storage:
+        _portfolio_storage[student_id] = []
+    _portfolio_storage[student_id].append(activity)
+    return jsonable_encoder(activity)
+
+@profile_router.get("/{student_id}/activities", response_model=List[Evidence])
+def get_activities(student_id: str):
+    """Get all activities for a student"""
+    activities = _portfolio_storage.get(student_id, [])
+    return [jsonable_encoder(activity) for activity in activities]
+
+@profile_router.put("/{student_id}/activities/{activity_id}", response_model=Evidence)
+def update_activity(student_id: str, activity_id: str, activity: Evidence):
+    """Update an existing activity"""
+    if student_id not in _portfolio_storage:
+        raise HTTPException(status_code=404, detail="Student portfolio not found")
+    
+    activities = _portfolio_storage[student_id]
+    index = next((i for i, a in enumerate(activities) if a.id == activity_id), None)
+    
+    if index is None:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    
+    activities[index] = activity
+    return jsonable_encoder(activity)
+
+@profile_router.delete("/{student_id}/activities/{activity_id}")
+def delete_activity(student_id: str, activity_id: str):
+    """Delete an activity from portfolio"""
+    if student_id not in _portfolio_storage:
+        raise HTTPException(status_code=404, detail="Student portfolio not found")
+    
+    activities = _portfolio_storage[student_id]
+    initial_length = len(activities)
+    _portfolio_storage[student_id] = [a for a in activities if a.id != activity_id]
+    
+    if len(_portfolio_storage[student_id]) == initial_length:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    
+    return {"message": "Activity deleted"}
