@@ -122,7 +122,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={`fixed left-4 top-4 bottom-4 bg-[#0f0f23] border border-white/20 rounded-2xl flex flex-col transition-all duration-300 ease-in-out z-50 shadow-2xl ${
+    <div className={`fixed left-4 top-4 bottom-4 bg-[#2a2a2a]/30 backdrop-blur-2xl border border-white/10 rounded-2xl flex flex-col transition-all duration-300 ease-in-out z-50 shadow-2xl ${
       isCollapsed ? 'w-16' : 'w-64'
     }`}>
       {/* Header Section */}
@@ -130,7 +130,7 @@ export default function Sidebar() {
         <div className="flex items-center gap-3">
           <button 
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+            className="p-1.5 bg-[#2a2a2a]/40 backdrop-blur-sm hover:bg-[#2a2a2a]/60 rounded-lg transition-colors"
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {isCollapsed ? (
@@ -161,7 +161,7 @@ export default function Sidebar() {
             <input
               type="text"
               placeholder="Search tools..."
-              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-colors"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-colors"
             />
           </div>
         </div>

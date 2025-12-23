@@ -52,7 +52,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
 
   if (!analysis && !isAnalyzing && !error) {
     return (
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-8 text-center">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-8 text-center">
         <Sparkles size={48} className="text-[#00ffff] mx-auto mb-4" />
         <h3 className="text-white text-lg font-semibold mb-2">Analyze Your Essay</h3>
         <p className="text-white/70 text-sm mb-6">
@@ -75,7 +75,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
 
   if (isAnalyzing) {
     return (
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-8 text-center">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-8 text-center">
         <Loader2 size={48} className="text-[#00ffff] mx-auto mb-4 animate-spin" />
         <h3 className="text-white text-lg font-semibold mb-2">Analyzing Essay...</h3>
         <p className="text-white/70 text-sm">This may take a few moments</p>
@@ -85,7 +85,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
 
   if (error) {
     return (
-      <div className="bg-[#0f0f23] border border-[#ff00ff]/20 rounded-md p-6">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-[#ff00ff]/50 rounded-md p-6">
         <div className="flex items-start gap-3">
           <AlertCircle size={24} className="text-[#ff00ff] flex-shrink-0 mt-0.5" />
           <div className="flex-1">
@@ -120,7 +120,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
         <button
           onClick={handleRegenerate}
           disabled={isAnalyzing}
-          className="px-4 py-2 bg-[#0f0f23] border border-white/20 text-white rounded-md text-sm font-medium hover:bg-white/5 transition-colors disabled:opacity-50 flex items-center gap-2"
+          className="px-4 py-2 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 text-white rounded-md text-sm font-medium hover:bg-white/5 transition-colors disabled:opacity-50 flex items-center gap-2"
         >
           <RefreshCw size={16} className={isAnalyzing ? "animate-spin" : ""} />
           Regenerate
@@ -128,7 +128,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
       </div>
 
       {/* Score Cards */}
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-6">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-6">
         <h4 className="text-white font-semibold mb-4">Scores</h4>
         <EssayScoreCard analysis={analysis} size="medium" />
       </div>
@@ -137,7 +137,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
       <EssayStrengthsWeaknesses analysis={analysis} />
 
       {/* Readability & Word Count */}
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-4">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-4">
         <h4 className="text-white font-semibold mb-3">Readability & Word Count</h4>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -171,7 +171,7 @@ export default function EssayAnalyzer({ essay, onApplySuggestion }: EssayAnalyze
       </div>
 
       {/* Suggestions */}
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-6">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-6">
         <h4 className="text-white font-semibold mb-4">Improvement Suggestions</h4>
         <EssaySuggestionsList
           suggestions={analysis.suggestions}

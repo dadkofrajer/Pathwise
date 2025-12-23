@@ -14,29 +14,29 @@ export default function StatusBadge({ status, showIcon = true }: StatusBadgeProp
     switch (status) {
       case 'not_started':
         return {
-          bg: 'bg-[#0a0a1a]',
-          border: 'border-white/20',
+          bg: 'bg-[#2a2a2a]/40 backdrop-blur-sm',
+          border: 'border-white/10',
           text: 'text-white/50',
           icon: <Circle size={12} className="text-white/50" />
         };
       case 'in_progress':
         return {
-          bg: 'bg-[#0a0a1a]',
-          border: 'border-[#00ffff]',
+          bg: 'bg-[#2a2a2a]/40 backdrop-blur-sm',
+          border: 'border-[#00ffff]/50',
           text: 'text-[#00ffff]',
           icon: <Clock size={12} className="text-[#00ffff]" />
         };
       case 'complete':
         return {
-          bg: 'bg-[#0a0a1a]',
-          border: 'border-[#00ffff]',
+          bg: 'bg-[#2a2a2a]/40 backdrop-blur-sm',
+          border: 'border-[#00ffff]/50',
           text: 'text-[#00ffff]',
           icon: <CheckCircle2 size={12} className="text-[#00ffff]" />
         };
       default:
         return {
-          bg: 'bg-[#0a0a1a]',
-          border: 'border-white/20',
+          bg: 'bg-[#2a2a2a]/40 backdrop-blur-sm',
+          border: 'border-white/10',
           text: 'text-white/50',
           icon: <Circle size={12} className="text-white/50" />
         };

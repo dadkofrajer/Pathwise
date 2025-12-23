@@ -181,7 +181,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
   return (
     <div className={`min-h-screen transition-all duration-300 bg-[#0a0a1a] ${isFocusMode ? 'opacity-50' : ''}`} style={{ minHeight: '100vh' }}>
       {/* Compact Header */}
-      <div className={`bg-[#0f0f23] border-b border-white/20 p-6 ${isFocusMode ? 'opacity-20 hover:opacity-100 transition-opacity duration-300' : ''}`}>
+      <div className={`bg-[#2a2a2a]/30 backdrop-blur-2xl border-b border-white/10 p-6 ${isFocusMode ? 'opacity-20 hover:opacity-100 transition-opacity duration-300' : ''}`}>
         <div className="max-w-5xl mx-auto">
           <div className="flex items-start justify-between">
             <div className="flex-1">
@@ -201,7 +201,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
               {/* Metadata Row */}
               <div className="flex items-center gap-3 text-sm text-white/70 ml-8">
                 {essay.collegeName && (
-                  <span className="px-2 py-0.5 bg-[#0a0a1a] border border-[#00ffff] rounded-md text-[#00ffff] font-medium">
+                  <span className="px-2 py-0.5 bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 rounded-md text-[#00ffff] font-medium">
                     {essay.collegeName}
                   </span>
                 )}
@@ -225,17 +225,17 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
                     Saved {formatLastSaved(lastSaved)}
                   </span>
                 )}
-                <span className="text-white/50 text-xs">• Press <kbd className="px-1.5 py-0.5 bg-[#0a0a1a] border border-white/20 rounded text-xs">⌘S</kbd> to save</span>
+                <span className="text-white/50 text-xs">• Press <kbd className="px-1.5 py-0.5 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded text-xs">⌘S</kbd> to save</span>
               </div>
             </div>
             
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 ease-in-out text-sm font-medium ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 ease-in-out text-sm font-medium ${
                 isSaving
-                  ? 'bg-[#0a0a1a] border border-white/20 text-white/50 cursor-not-allowed animate-pulse'
-                  : 'bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 active:scale-95'
+                  ? 'bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 text-white/50 cursor-not-allowed animate-pulse'
+                  : 'bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 text-[#00ffff] hover:bg-[#00ffff]/10 active:scale-95'
               }`}
               onMouseEnter={() => setShowTooltip('Save (⌘S)')}
               onMouseLeave={() => setShowTooltip(null)}
@@ -248,7 +248,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
       </div>
 
       {/* Sticky Prompt Bar */}
-      <div className={`sticky top-0 z-10 bg-[#0f0f23] border-b border-white/20 ${isFocusMode ? 'opacity-20 hover:opacity-100 transition-opacity duration-300' : ''}`}>
+      <div className={`sticky top-0 z-10 bg-[#2a2a2a]/30 backdrop-blur-2xl border-b border-white/10 ${isFocusMode ? 'opacity-20 hover:opacity-100 transition-opacity duration-300' : ''}`}>
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-2">
             <button
@@ -271,7 +271,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
             </button>
             <button
               onClick={copyPrompt}
-              className="p-2 text-white/70 hover:text-white hover:bg-[#0a0a1a] rounded-md transition-all duration-200"
+              className="p-2 text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm rounded-md transition-all duration-200"
               onMouseEnter={() => setShowTooltip('Copy prompt')}
               onMouseLeave={() => setShowTooltip(null)}
             >
@@ -290,7 +290,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
       <div className={`max-w-5xl mx-auto grid grid-cols-[1fr,250px] gap-10 mt-8 px-6 ${isFocusMode ? '[&>*:not(:first-child)]:opacity-20 [&>*:not(:first-child)]:hover:opacity-100 transition-opacity duration-300' : ''}`}>
         {/* Editor Section */}
         <div className="min-w-0">
-          <div className="bg-[#0f0f23] border border-white/20 rounded-md relative overflow-hidden">
+          <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md relative overflow-hidden">
             <textarea
               value={essay.content}
               onChange={handleContentChange}
@@ -308,7 +308,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
             />
             
             {/* Word Count Bottom Right */}
-            <div className="absolute bottom-3 right-4 text-xs text-white/50 bg-[#0a0a1a] border border-white/20 px-2 py-1 rounded-md font-medium">
+            <div className="absolute bottom-3 right-4 text-xs text-white/50 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 px-2 py-1 rounded-md font-medium">
               {wordCount} / {essay.wordLimit}
             </div>
             
@@ -327,7 +327,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
               className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out active:scale-95 ${
                 showAnalysis
                   ? 'bg-[#00ffff] text-[#0a0a1a]'
-                  : 'text-white/70 hover:text-white hover:bg-[#0f0f23] border border-white/20 hover:border-[#00ffff]'
+                  : 'text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 hover:border-[#00ffff]/50'
               }`}
               onMouseEnter={() => setShowTooltip(showAnalysis ? 'Hide analysis' : 'Show essay analysis')}
               onMouseLeave={() => setShowTooltip(null)}
@@ -336,7 +336,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
               {showAnalysis ? 'Hide Analysis' : 'Analyze Essay'}
             </button>
             <button
-              className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-[#0f0f23] border border-white/20 hover:border-[#00ffff] rounded-md transition-all duration-200 ease-in-out active:scale-95 font-medium"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 hover:border-[#00ffff]/50 rounded-md transition-all duration-200 ease-in-out active:scale-95 font-medium"
               onMouseEnter={() => setShowTooltip('AI-powered essay refinement')}
               onMouseLeave={() => setShowTooltip(null)}
             >
@@ -345,7 +345,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
             </button>
             <button
               onClick={() => setIsFocusMode(!isFocusMode)}
-              className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-[#0f0f23] border border-white/20 rounded-md transition-all duration-200 ease-in-out active:scale-95 font-medium"
+              className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md transition-all duration-200 ease-in-out active:scale-95 font-medium"
               onMouseEnter={() => setShowTooltip(isFocusMode ? 'Exit focus mode' : 'Enter focus mode')}
               onMouseLeave={() => setShowTooltip(null)}
             >
@@ -355,7 +355,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
 
           {/* Essay Analysis Panel */}
           {showAnalysis && (
-            <div className="mt-6 bg-[#0f0f23] border border-white/20 rounded-md p-6">
+            <div className="mt-6 bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-6">
               <EssayAnalyzer
                 essay={essay}
                 onApplySuggestion={(suggestion: EssaySuggestion) => {
@@ -381,7 +381,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
         {/* Right Sidebar */}
         <div className="space-y-4">
           {/* Draft Status */}
-          <div className="bg-[#0f0f23] border border-white/20 rounded-md p-4">
+          <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-4">
             <h3 className="text-sm font-semibold text-white mb-3">Draft Status</h3>
             <div className="space-y-2">
               {(['not_started', 'in_progress', 'complete'] as const).map((status) => (
@@ -390,8 +390,8 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
                   onClick={() => setEssay(prev => ({ ...prev, status }))}
                   className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-md text-sm transition-all duration-200 ease-in-out ${
                     essay.status === status
-                      ? 'bg-[#0a0a1a] border border-[#00ffff] text-white'
-                      : 'text-white/70 hover:bg-[#0a0a1a] hover:text-white active:scale-95 border border-transparent'
+                      ? 'bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 text-white'
+                      : 'text-white/70 hover:bg-[#2a2a2a]/40 hover:text-white active:scale-95 border border-transparent'
                   }`}
                   onMouseEnter={() => setShowTooltip(`Set status to ${getStatusLabel(status)}`)}
                   onMouseLeave={() => setShowTooltip(null)}
@@ -412,14 +412,14 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
           </div>
 
           {/* Word Limit Progress */}
-          <div className="bg-[#0f0f23] border border-white/20 rounded-md p-4">
+          <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-4">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-semibold text-white">Word Limit</h3>
               <span className="text-xs font-bold text-white transition-colors duration-200">
                 {wordCount} / {essay.wordLimit}
               </span>
             </div>
-            <div className="relative w-full bg-[#0a0a1a] border border-white/10 rounded-full h-2.5 overflow-hidden">
+            <div className="relative w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/5 rounded-full h-2.5 overflow-hidden">
               <div
                 className="h-full transition-all duration-500 ease-out relative"
                 style={{ 
@@ -454,7 +454,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
 
           {/* Upload to Portal Button */}
           <button 
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#0f0f23] border border-[#00ffff] hover:bg-[#00ffff]/10 text-[#00ffff] rounded-md transition-all duration-200 ease-in-out active:scale-95 text-sm font-medium"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 hover:bg-[#00ffff]/10 text-[#00ffff] rounded-md transition-all duration-200 ease-in-out active:scale-95 text-sm font-medium"
             onMouseEnter={() => setShowTooltip('Upload essay to application portal')}
             onMouseLeave={() => setShowTooltip(null)}
           >
@@ -464,7 +464,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
           
           {/* Writing Statistics Card */}
           {essay.content.length > 0 && (
-            <div className="bg-[#0f0f23] border border-white/20 rounded-md p-4">
+            <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-4">
               <h3 className="text-sm font-semibold text-white mb-3">Statistics</h3>
               <div className="space-y-2 text-xs text-white/70">
                 <div className="flex items-center justify-between">
@@ -487,10 +487,10 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
 
       {/* Google Doc Link Section (Below Editor) */}
       <div className="max-w-5xl mx-auto mt-10 px-6">
-        <div className="bg-[#0f0f23] border border-white/20 rounded-md overflow-hidden">
+        <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md overflow-hidden">
           <button
             onClick={() => setIsGoogleDocExpanded(!isGoogleDocExpanded)}
-            className="w-full flex items-center justify-between p-4 hover:bg-[#0a0a1a] transition-all duration-200 ease-in-out"
+            className="w-full flex items-center justify-between p-4 hover:bg-[#2a2a2a]/40 backdrop-blur-sm transition-all duration-200 ease-in-out"
           >
             <div className="flex items-center gap-2">
               <LinkIcon size={18} className="text-white/50" />
@@ -510,7 +510,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
                 value={essay.googleDocUrl || ''}
                 onChange={handleGoogleDocChange}
                 placeholder="https://docs.google.com/document/d/..."
-                className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-3 py-2 text-sm text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
+                className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200"
               />
               <div className="flex items-center justify-between mt-2">
                 <p className="text-xs text-white/50">
@@ -530,7 +530,7 @@ export default function EssayEditor({ essay: initialEssay, onSave }: EssayEditor
       
       {/* Tooltip */}
       {showTooltip && (
-        <div className="fixed z-50 px-3 py-1.5 bg-[#0f0f23] border border-white/20 rounded-md shadow-lg text-xs text-white pointer-events-none animate-in fade-in duration-150"
+        <div className="fixed z-50 px-3 py-1.5 bg-[#2a2a2a]/40 backdrop-blur-xl border border-white/10 rounded-md shadow-lg text-xs text-white pointer-events-none animate-in fade-in duration-150"
           style={{
             left: '50%',
             top: '10%',

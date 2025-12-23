@@ -59,8 +59,8 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-2xl border border-white/10 rounded-md shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/20">
           <h2 className="text-white text-xl font-bold">
@@ -68,7 +68,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
           </h2>
           <button
             onClick={handleClose}
-            className="text-white/70 hover:text-white hover:bg-[#0a0a1a] p-1.5 rounded-md transition-all duration-200"
+            className="text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm p-1.5 rounded-md transition-all duration-200"
             aria-label="Close modal"
           >
             <X size={20} />
@@ -88,7 +88,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Common Application Essay"
-              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200"
               required
             />
           </div>
@@ -104,7 +104,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Enter the essay prompt or question..."
               rows={4}
-              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200 resize-none"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200 resize-none"
               required
             />
           </div>
@@ -120,7 +120,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={wordLimit}
               onChange={(e) => setWordLimit(Number(e.target.value) || 650)}
               min="1"
-              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200"
             />
           </div>
 
@@ -135,7 +135,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               value={googleDocUrl}
               onChange={(e) => setGoogleDocUrl(e.target.value)}
               placeholder="https://docs.google.com/document/d/..."
-              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200"
             />
           </div>
 
@@ -150,7 +150,7 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
               onChange={(e) => setContent(e.target.value)}
               placeholder="Start writing your essay here (optional)..."
               rows={6}
-              className="w-full bg-[#0a0a1a] border border-white/20 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff] transition-all duration-200 resize-none"
+              className="w-full bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md px-4 py-2.5 text-white placeholder-white/50 focus:outline-none focus:border-[#00ffff]/50 transition-all duration-200 resize-none"
             />
           </div>
 
@@ -159,13 +159,13 @@ export default function CreateEssayModal({ isOpen, onClose, onSubmit, collegeId,
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-white/70 hover:text-white hover:bg-[#0a0a1a] rounded-md transition-all duration-200 text-sm font-medium"
+              className="px-4 py-2 text-white/70 hover:text-white hover:bg-[#2a2a2a]/40 backdrop-blur-sm rounded-md transition-all duration-200 text-sm font-medium"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex items-center gap-2 bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
+              className="flex items-center gap-2 bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
             >
               <Plus size={16} />
               Create Essay

@@ -28,7 +28,7 @@ export default function CollegeEssaySection({
   return (
     <div className="mb-4">
       {/* College Header */}
-      <div className="bg-[#0f0f23] border border-white/20 rounded-md p-5 hover:border-[#00ffff]/50 transition-all duration-200">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-5 hover:border-[#00ffff]/30 transition-all duration-200">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 flex-1">
             <button
@@ -43,7 +43,7 @@ export default function CollegeEssaySection({
               <h3 className="text-white text-lg font-bold mb-1">{college.name}</h3>
               <div className="flex items-center gap-3">
                 <p className="text-sm text-white/70">{completedCount} of {totalCount} essays complete</p>
-                <div className="flex-1 max-w-[120px] bg-[#0a0a1a] rounded-full h-1.5 overflow-hidden border border-white/10">
+                <div className="flex-1 max-w-[120px] bg-[#2a2a2a]/40 backdrop-blur-sm rounded-full h-1.5 overflow-hidden border border-white/5">
                   <div
                     className="h-full bg-[#00ffff] transition-all duration-500"
                     style={{ width: `${completionPercentage}%` }}
@@ -56,7 +56,7 @@ export default function CollegeEssaySection({
           {onAdd && (
             <button
               onClick={() => onAdd(college.id)}
-              className="flex items-center gap-2 bg-[#0f0f23] border border-[#00ffff] text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
+              className="flex items-center gap-2 bg-[#2a2a2a]/40 backdrop-blur-sm border border-[#00ffff]/50 text-[#00ffff] px-4 py-2 rounded-md hover:bg-[#00ffff]/10 transition-all duration-200 text-sm font-medium"
             >
               <Plus size={16} />
               Add Essay
@@ -69,8 +69,8 @@ export default function CollegeEssaySection({
       {isExpanded && (
         <div className="mt-4 space-y-4 ml-12">
           {college.essays.length === 0 ? (
-            <div className="bg-[#0f0f23] border border-white/20 rounded-md p-8 text-center">
-              <div className="inline-flex p-3 bg-[#0a0a1a] border border-white/20 rounded-md mb-3">
+            <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-8 text-center">
+              <div className="inline-flex p-3 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md mb-3">
                 <FileText size={24} className="text-white/50" />
               </div>
               <p className="text-white/70 text-sm">No essays for this college yet.</p>

@@ -77,13 +77,13 @@ export default function EssaysPage() {
         <Sidebar />
         <main className="ml-64 overflow-y-auto">
           {/* Top Navigation Header */}
-          <header className="border-b border-white/20 bg-[#0f0f23] px-6 py-4">
+          <header className="border-b border-white/10 bg-[#2a2a2a]/30 backdrop-blur-2xl px-6 py-4">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold text-white">Essay Repository</h1>
               </div>
               <div className="flex items-center gap-4">
-                <div className="px-4 py-2 bg-[#0f0f23] border border-white/20 rounded-md">
+                <div className="px-4 py-2 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md">
                   <span className="text-sm text-white font-medium">
                     {generalEssays.length + collegeEssays.reduce((sum, c) => sum + c.essays.length, 0)} essays
                   </span>
@@ -111,8 +111,8 @@ export default function EssaysPage() {
               </div>
 
               {collegeEssays.length === 0 ? (
-                <div className="bg-[#0f0f23] border border-white/20 rounded-md p-12 text-center">
-                  <div className="inline-flex p-4 bg-[#0a0a1a] border border-white/20 rounded-md mb-4">
+                <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-white/10 rounded-md p-12 text-center">
+                  <div className="inline-flex p-4 bg-[#2a2a2a]/40 backdrop-blur-sm border border-white/10 rounded-md mb-4">
                     <Building2 size={32} className="text-white/50" />
                   </div>
                   <p className="text-white/70 mb-2">No college-specific essays yet.</p>

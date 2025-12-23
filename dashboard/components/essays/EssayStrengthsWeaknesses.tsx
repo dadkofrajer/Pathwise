@@ -11,7 +11,7 @@ export default function EssayStrengthsWeaknesses({ analysis }: EssayStrengthsWea
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {/* Strengths */}
-      <div className="bg-[#0f0f23] border border-[#00ff00]/20 rounded-md p-4">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-[#00ff00]/50 rounded-md p-4">
         <div className="flex items-center gap-2 mb-3">
           <CheckCircle2 size={18} className="text-[#00ff00]" />
           <h3 className="text-white font-semibold">Strengths</h3>
@@ -31,7 +31,7 @@ export default function EssayStrengthsWeaknesses({ analysis }: EssayStrengthsWea
       </div>
 
       {/* Weaknesses */}
-      <div className="bg-[#0f0f23] border border-[#ff00ff]/20 rounded-md p-4">
+      <div className="bg-[#2a2a2a]/30 backdrop-blur-xl border border-[#ff00ff]/50 rounded-md p-4">
         <div className="flex items-center gap-2 mb-3">
           <XCircle size={18} className="text-[#ff00ff]" />
           <h3 className="text-white font-semibold">Areas for Improvement</h3>
