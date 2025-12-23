@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
-import { Plus, User, Calendar, Award, Users, Clock, Edit, Trash2 } from "lucide-react";
+import { Plus, User, Calendar, Award, Users, Clock, Edit, Trash2, Sparkles } from "lucide-react";
 import { getProfile, getActivities, deleteActivity, type Activity, type StudentProfile } from "@/lib/api";
 
 export default function ProfilePage() {
@@ -117,13 +117,24 @@ export default function ProfilePage() {
           <div className="bg-[#0f0f23] border border-white/20 rounded-xl p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-white text-xl font-semibold">Portfolio Activities</h2>
-              <Link
-                href="/portfolio/create"
-                className="flex items-center gap-2 px-4 py-2 bg-[#0080ff] hover:bg-[#0080ff]/80 text-white rounded-lg transition-colors"
-              >
-                <Plus className="w-4 h-4" />
-                {activities.length === 0 ? "Create Portfolio" : "Add Activity"}
-              </Link>
+              <div className="flex items-center gap-3">
+                {profile && activities.length > 0 && (
+                  <Link
+                    href="/profile/evaluate"
+                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-600/80 text-white rounded-lg transition-colors"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Evaluate Profile
+                  </Link>
+                )}
+                <Link
+                  href="/portfolio/create"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#0080ff] hover:bg-[#0080ff]/80 text-white rounded-lg transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  {activities.length === 0 ? "Create Portfolio" : "Add Activity"}
+                </Link>
+              </div>
             </div>
 
             {activities.length === 0 ? (
