@@ -62,7 +62,7 @@ export default function Sidebar() {
           { icon: <FileCheck size={18} />, label: 'Application Tracker', href: '/applications' },
           { icon: <List size={18} />, label: 'Essay Manager', href: '/essays' },
           { icon: <Percent size={18} />, label: 'Chance Me', href: '/chance-me' },
-          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/evaluate' },
+          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/profile/evaluate' },
           { icon: <GraduationCap size={18} />, label: 'Counselor Connect', href: '/counselor', badge: 'New' },
         ],
       },
@@ -73,7 +73,7 @@ export default function Sidebar() {
         title: 'PLANNING TOOLS',
         icon: <BarChart3 size={14} />,
         items: [
-          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/evaluate-profile' },
+          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/profile/evaluate' },
           { icon: <Percent size={18} />, label: 'Chance Me', href: '/chance-me-tool' },
           { icon: <Search size={18} />, label: 'College Match', href: '/college-match' },
         ],
@@ -98,7 +98,7 @@ export default function Sidebar() {
         icon: <Lightbulb size={14} />,
         items: [
           { icon: <GraduationCap size={18} />, label: 'Counselor Connect', href: '/counselor' },
-          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/evaluate' },
+          { icon: <BarChart3 size={18} />, label: 'Evaluate Profile', href: '/profile/evaluate' },
         ],
       },
     },

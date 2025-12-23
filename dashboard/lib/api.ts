@@ -151,3 +151,125 @@ export async function deleteActivity(studentId: string, activityId: string) {
   return response.json();
 }
 
+// Portfolio Analysis Types
+export interface RecommendationTask {
+  title: string;
+  track: string;
+  estimated_hours: number;
+  definition_of_done: string[];
+  micro_coaching: string;
+  quick_links: string[];
+}
+
+export interface CriticalImprovementSection {
+  gap_type: string;
+  gap_description: string;
+  severity: number;
+  tasks: RecommendationTask[];
+}
+
+export interface LensImprovementSection {
+  lens: string;
+  current_score: number;
+  improvement_opportunity: string;
+  tasks: RecommendationTask[];
+}
+
+export interface DiversitySpikeSection {
+  has_spike: boolean;
+  spike_theme?: string;
+  spike_share?: number;
+  coverage_index: number;
+  needs_improvement: boolean;
+  tasks: RecommendationTask[];
+}
+
+export interface AlignmentPriority {
+  school_name: string;
+  alignment_score: number;
+  is_high_alignment: boolean;
+  priority_tasks: string[];
+  alignment_notes: string;
+}
+
+export interface TestAnalysis {
+  school_name: string;
+  test_policy: string;
+  test_type?: string;
+  current_score?: number;
+  mid50_scores?: number[];
+  competitiveness?: string;
+  recommendation: string;
+  rationale: string;
+  tasks: RecommendationTask[];
+}
+
+export interface PortfolioAnalyzeRequest {
+  country_tracks: string[];
+  schools: string[];
+  deadlines: Record<string, string>;
+  weekly_hours_cap: number;
+  student_profile?: StudentProfile;
+  portfolio: Activity[];
+}
+
+export interface PortfolioAnalyzeResponse {
+  scores: {
+    impact_total: number;
+    lens_scores: Record<string, number>;
+    coverage: number;
+    spike?: {
+      theme: string;
+      share: number;
+    };
+    alignment?: Record<string, number>;
+  };
+  gaps: Array<{
+    type: string;
+    lens?: string;
+    severity: number;
+  }>;
+  critical_improvements: CriticalImprovementSection[];
+  lens_improvements: LensImprovementSection[];
+  diversity_spike?: DiversitySpikeSection;
+  alignment_priorities: AlignmentPriority[];
+  standardized_tests: TestAnalysis[];
+}
+
+export async function analyzePortfolio(request: PortfolioAnalyzeRequest): Promise<PortfolioAnalyzeResponse> {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout for analysis
+    
+    try {
+      const response = await fetch(`${API_BASE_URL}/portfolio/analyze`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(request),
+        signal: controller.signal,
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to analyze portfolio: ${response.statusText} - ${errorText}`);
+      }
+      
+      return response.json();
+    } catch (fetchError: any) {
+      clearTimeout(timeoutId);
+      if (fetchError.name === 'AbortError') {
+        throw new Error('Analysis timeout - the analysis is taking too long. Please try again.');
+      }
+      if (fetchError.message && fetchError.message.includes('Failed to fetch')) {
+        throw new Error('Cannot connect to backend server. Please ensure the backend is running.');
+      }
+      throw fetchError;
+    }
+  } catch (error) {
+    console.error('Portfolio analysis error:', error);
+    throw error;
+  }
+}
+
